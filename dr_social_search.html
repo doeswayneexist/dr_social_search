@@ -1,0 +1,50 @@
+<title>Dr. Social Search</title>
+
+<style type="text/css">
+.input-class
+{
+  height:30px;
+  margin-bottom: 12px;
+}
+
+.input-class[placeholder]
+{
+  line-height:30px;
+  font-size:22px;
+}
+</style>
+
+
+<h3>Make sure to allow pop ups.</h3>
+<h1>Doctor Social Search</h1>
+<h2>Quickly find citation sites for doctors.</h2>
+<p>Enter doctor information:</p>
+<input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Name" id="drName"/>
+</br>
+<input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Specialty"id="drSpec"/>
+</br>
+<input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Location"id="drLoc"/>
+</br>
+<input type="button" value="click" class="input-button" OnClick="docFinder()"/>
+<script>
+//create an array of social sites
+var socialSites = ["Yelp", "Facebook"];
+
+//runs when the button is clicked
+function docFinder (){
+
+	var docName = document.getElementById('drName').value;
+	var docArea = document.getElementById('drLoc').value;
+	var docSpec = document.getElementById('drSpec').value;
+	var docString = docName+" "+docArea+" "+docSpec;
+
+	for (i = 0; i < socialSites.length; i++) { 
+	    //create a generic url query
+	    var url = "https://www.google.com/search?q="+socialSites[i]+" "+docString;
+		//there doesnt seem to be a difference between the order of the two variables in the above string
+
+		//open a new window
+		window.open(url, '_blank');
+	}
+}
+</script>
