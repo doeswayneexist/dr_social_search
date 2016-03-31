@@ -17,7 +17,7 @@
 <h3>Make sure to allow pop ups.</h3>
 <h1>Doctor Social Search</h1>
 <h2>Quickly find citation sites for doctors.</h2>
-<p>Enter doctor information in the fields below and Dr Social Search will automatically generate new chrome tabs with SERP that attempt to find your doctor across multiple popular social sites. <strong>Please note, if only one new tab pops up, make sure to return to this page and allow pop ups.<strong></p>
+<p>Enter doctor information in the fields below and Dr Social Search will automatically generate new chrome tabs with SERP that attempt to find your doctor across multiple popular social sites. <strong>Please note, if only one new tab pops up, make sure to return to this page and allow pop ups.</strong></p>
 <input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Name" id="drName"/>
 </br>
 <input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Specialty"id="drSpec"/>
@@ -26,7 +26,9 @@
 <input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Location"id="drLoc"/>
 <span>(optional)</span>
 </br>
-<input type="button" value="click" class="input-button" OnClick="docFinder()"/>
+<input type="button" value="General Web Presence Search" class="input-button" OnClick="docFinder()"/>
+</br>
+<input type="button" value="Case Study Search" class="input-button" OnClick="docFinderBefore()"/>
 <p>Got a feature request? </br><a href="mailto:doeswayneexist+a03yrhxuyi3iqvlcwj8f@boards.trello.com">Send it here. (Copy the email address in this link. Put the gist of the feture request as the subject.)</a></p>
 <script>
 
@@ -52,5 +54,42 @@ function docFinder (){
 		//open a new window
 		window.open(url, '_blank');
 	}
+}
+
+function docFinderBefore (){
+
+	//we need to open up pages for all the social sites
+	var socialSitesBefore = ["Google+plus", "Facebook", "Twitter", "Yelp"];
+	var url;
+	
+
+	var docName = document.getElementById('drName').value;
+	var docArea = document.getElementById('drLoc').value;
+	var docSpec = document.getElementById('drSpec').value;
+	var docString = docName+" "+docArea+" "+docSpec;
+
+	for (i = 0; i < socialSitesBefore.length; i++) { 
+	    //create a generic url query
+	    url = "https://www.google.com/search?q="+socialSitesBefore[i]+" "+docString;
+		//there doesnt seem to be a difference between the order of the two variables in the above string
+
+		//open a new window
+		window.open(url, '_blank');
+	}
+
+	//open all the SERP pages
+	url = "https://www.google.com/search?q="+docString;
+	window.open(url, '_blank');
+	url = "https://www.google.com/search?q="+docSpec+" "+docArea;
+	window.open(url, '_blank');
+	//turning off till i program sub areas
+	//url = "https://www.google.com/search?q="+docSpec+" "+docArea;
+	//window.open(url, '_blank');
+	url = "http://www.yelp.com/search?find_desc="+docSpec+"&find_loc="+docArea
+	window.open(url, '_blank');
+	//turning off till i program sub areas
+	//url = "http://www.yelp.com/search?find_desc="+docSpec+"&find_loc="+docArea
+	//window.open(url, '_blank');
+
 }
 </script>
