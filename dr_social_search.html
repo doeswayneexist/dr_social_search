@@ -68,6 +68,11 @@ function docFinderBefore (){
 	var docSpec = document.getElementById('drSpec').value;
 	var docString = docName+" "+docArea+" "+docSpec;
 
+	var devInsights = "https://developers.google.com/speed/pagespeed/insights/"
+	var ppCheck = "http://www.patientpop.com/checkup"
+	window.open(devInsights, '_blank');
+	window.open(ppCheck, '_blank');
+
 	for (i = 0; i < socialSitesBefore.length; i++) { 
 	    //create a generic url query
 	    url = "https://www.google.com/search?q="+socialSitesBefore[i]+" "+docString;
