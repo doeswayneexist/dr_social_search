@@ -14,10 +14,14 @@
 }
 </style>
 
+<!-- All the intro HTML -->
 <h3>Make sure to allow pop ups.</h3>
 <h1>Doctor Social Search</h1>
 <h2>Quickly find citation sites for doctors.</h2>
 <p>Enter doctor information in the fields below and Dr Social Search will automatically generate new chrome tabs with SERP that attempt to find your doctor across multiple popular social sites. <strong>Please note, if only one new tab pops up, make sure to return to this page and allow pop ups.</strong></p>
+
+<!-- Start the form -->
+<!-- Basic fields for general search -->
 <input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Name" id="drName"/>
 </br>
 <input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Specialty"id="drSpec"/>
@@ -27,6 +31,15 @@
 <span>(optional)</span>
 </br>
 <input type="button" value="General Web Presence Search" class="input-button" OnClick="docFinder()"/>
+</br>
+</br>
+
+<!-- Fields for Case Study Search -->
+<input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Website URL"id="drURL"/>
+<span>(optional)</span>
+</br>
+<input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Neigborhood"id="drHood"/>
+<span>(optional)</span>
 </br>
 <input type="button" value="Case Study Search" class="input-button" OnClick="docFinderBefore()"/>
 <p>Got a feature request? </br><a href="mailto:doeswayneexist+a03yrhxuyi3iqvlcwj8f@boards.trello.com">Send it here. (Copy the email address in this link. Put the gist of the feture request as the subject.)</a></p>
@@ -61,18 +74,23 @@ function docFinderBefore (){
 	//we need to open up pages for all the social sites
 	var socialSitesBefore = ["Google+plus", "Facebook", "Twitter", "Yelp"];
 	var url;
-	
-
 	var docName = document.getElementById('drName').value;
 	var docArea = document.getElementById('drLoc').value;
 	var docSpec = document.getElementById('drSpec').value;
 	var docString = docName+" "+docArea+" "+docSpec;
-
-	var devInsights = "https://developers.google.com/speed/pagespeed/insights/"
+	var docURL = document.getElementById('drURL').value;
+	var docHood = document.getElementById('drHood').value;
+	var devInsights = "https://developers.google.com/speed/pagespeed/insights/?url="+docURL;
 	var ppCheck = "http://www.patientpop.com/checkup"
-	window.open(devInsights, '_blank');
-	window.open(ppCheck, '_blank');
 
+	//open up basic windows
+	if(docURL) {
+		window.open(docURL, '_blank'); //doctors website
+		window.open(devInsights, '_blank'); //google insights page with docs url loaded
+	}
+	window.open(ppCheck, '_blank'); //ppadmin tool that checks links online
+
+	//open up google SERPs with links to their social profiles
 	for (i = 0; i < socialSitesBefore.length; i++) { 
 	    //create a generic url query
 	    url = "https://www.google.com/search?q="+socialSitesBefore[i]+" "+docString;
@@ -82,19 +100,27 @@ function docFinderBefore (){
 		window.open(url, '_blank');
 	}
 
-	//open all the SERP pages
+	//open all the Google SERP pages
 	url = "https://www.google.com/search?q="+docString;
 	window.open(url, '_blank');
+	
 	url = "https://www.google.com/search?q="+docSpec+" "+docArea;
 	window.open(url, '_blank');
-	//turning off till i program sub areas
-	//url = "https://www.google.com/search?q="+docSpec+" "+docArea;
-	//window.open(url, '_blank');
+	
+	//look for SERP pages if the doctor has neighborhoods
+	if(docHood){
+		url = "https://www.google.com/search?q="+docSpec+" "+docHood;
+		window.open(url, '_blank');
+	}
+	
+	//open up the Yelp SERP pages
 	url = "http://www.yelp.com/search?find_desc="+docSpec+"&find_loc="+docArea
 	window.open(url, '_blank');
-	//turning off till i program sub areas
-	//url = "http://www.yelp.com/search?find_desc="+docSpec+"&find_loc="+docArea
-	//window.open(url, '_blank');
-
+	
+	//look for Yelp SERP pages if the doctor has neighborhoods
+	if(docHood){
+		url = "http://www.yelp.com/search?find_desc="+docSpec+"&find_loc="+docHood
+		window.open(url, '_blank');
+	}
 }
 </script>
