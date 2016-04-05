@@ -52,6 +52,7 @@
 alert("If only one new tab is created return to this page and click allow pop ups.")
 //create an array of social sites //first element is a space so that the first tab is a generic search
 var socialSites = ["", "google+plus", "Facebook", "Youtube", "Yelp", "Pinterest", "Realself", "LinkedinIn", "Vitals.com", "Healthgrades", "MD.com", "WebMD", "BetterDoctor", "RateMDs"];
+var socialSitesNew = ["", "Twitter", "Google+Plus", "Facebook", "Yelp", "Vitals.com", "healthgrades", "ratemds.com", "md.com", "webmd.com"];
 
 //creates new tabs each with a google SERP looking for a doctor and a specific citation site
 function docFinder (){
@@ -61,9 +62,9 @@ function docFinder (){
 	var docSpec = document.getElementById('drSpec').value;
 	var docString = docName+" "+docArea+" "+docSpec;
 
-	for (i = 0; i < socialSites.length; i++) { 
+	for (i = 0; i < socialSitesNew.length; i++) { 
 	    //create a generic url query
-	    var url = "https://www.google.com/search?q="+socialSites[i]+" "+docString;
+	    var url = "https://www.google.com/search?q="+socialSitesNew[i]+" "+docString;
 		//there doesnt seem to be a difference between the order of the two variables in the above string
 
 		//open a new window
