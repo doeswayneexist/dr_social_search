@@ -1,19 +1,19 @@
 <title>Dr. Social Search</title>
 
+<!-- eventually i will place this in a sep css file -->
 <style type="text/css">
-.input-class
-{
-  height:30px;
-  margin-bottom: 12px;
+.input-class{
+	height:30px;
+	margin-bottom: 12px;
 }
 
-.input-class[placeholder]
-{
-  line-height:30px;
-  font-size:22px;
+.input-class[placeholder]{
+	line-height:30px;
+	font-size:22px;
 }
 </style>
 
+<!-- yes this should be in a body tag, but f that -->
 <!-- All the intro HTML -->
 <h3>Make sure to allow pop ups.</h3>
 <h1>Doctor Social Search</h1>
@@ -43,6 +43,9 @@
 </br>
 <input type="button" value="Case Study Search" class="input-button" OnClick="docFinderBefore()"/>
 <p>Got a feature request? </br><a href="mailto:doeswayneexist+a03yrhxuyi3iqvlcwj8f@boards.trello.com">Send it here. (Copy the email address in this link. Put the gist of the feture request as the subject.)</a></p>
+
+
+<!-- All dem scripts start here -->
 <script>
 
 //remind people to allow pop ups.
@@ -51,7 +54,7 @@ alert("If only one new tab is created return to this page and click allow pop up
 var socialSites = ["", "google+plus", "Facebook", "Youtube",
 "Yelp", "Pinterest", "Realself", "LinkedinIn", "Vitals.com", "Healthgrades", "MD.com", "WebMD", "BetterDoctor", "RateMDs"];
 
-//runs when the button is clicked
+//creates new tabs each with a google SERP looking for a doctor and a specific citation site
 function docFinder (){
 
 	var docName = document.getElementById('drName').value;
@@ -69,6 +72,7 @@ function docFinder (){
 	}
 }
 
+//creates new tabs that correspond to the tabs we need to do case studies
 function docFinderBefore (){
 
 	//we need to open up pages for all the social sites
