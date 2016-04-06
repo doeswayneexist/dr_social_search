@@ -33,6 +33,9 @@
 <input type="button" value="General Web Presence Search" class="input-button" OnClick="docFinder()"/>
 </br>
 </br>
+<input type="button" value="Review Site Search" class="input-button" OnClick="docFinderReviews()"/>
+</br>
+</br>
 
 <!-- Fields for Case Study Search -->
 <input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Website URL"id="drURL"/>
@@ -49,10 +52,11 @@
 <script>
 
 //remind people to allow pop ups.
-alert("If only one new tab is created return to this page and click allow pop ups.")
+//alert("If only one new tab is created return to this page and click allow pop ups.")
 //create an array of social sites //first element is a space so that the first tab is a generic search
 var socialSites = ["", "google+plus", "Facebook", "Youtube", "Yelp", "Pinterest", "Realself", "LinkedinIn", "Vitals.com", "Healthgrades", "MD.com", "WebMD", "BetterDoctor", "RateMDs"];
 var socialSitesNew = ["", "Twitter", "Google+Plus", "Facebook", "Yelp", "Vitals.com", "healthgrades", "ratemds.com", "md.com", "webmd.com"];
+var reviewSites = ["", "Yelp", "Healthgrades", "Yellow Pages", "Facebook"];
 
 //creates new tabs each with a google SERP looking for a doctor and a specific citation site
 function docFinder (){
@@ -65,6 +69,24 @@ function docFinder (){
 	for (i = 0; i < socialSitesNew.length; i++) { 
 	    //create a generic url query
 	    var url = "https://www.google.com/search?q="+socialSitesNew[i]+" "+docString;
+		//there doesnt seem to be a difference between the order of the two variables in the above string
+
+		//open a new window
+		window.open(url, '_blank');
+	}
+}
+
+//creates new tabs each with a google SERP looking for a doctor and a specific citation site
+function docFinderReviews (){
+
+	var docName = document.getElementById('drName').value;
+	var docArea = document.getElementById('drLoc').value;
+	var docSpec = document.getElementById('drSpec').value;
+	var docString = docName+" "+docArea+" "+docSpec;
+
+	for (i = 0; i < reviewSites.length; i++) { 
+	    //create a generic url query
+	    var url = "https://www.google.com/search?q="+reviewSites[i]+" "+docString;
 		//there doesnt seem to be a difference between the order of the two variables in the above string
 
 		//open a new window
