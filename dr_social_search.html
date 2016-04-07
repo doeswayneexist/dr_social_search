@@ -1,22 +1,28 @@
-<title>Dr. Social Search</title>
+<head>
+	<title>Dr. Social Search</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-<!-- eventually i will place this in a sep css file -->
-<style type="text/css">
-.input-class{
-	height:30px;
-	margin-bottom: 12px;
-}
+	<!-- eventually i will place this in a sep css file -->
+	<style type="text/css">
+		.input-class{
+			height:30px;
+			margin-bottom: 12px;
+		}
 
-.input-class[placeholder]{
-	line-height:30px;
-	font-size:22px;
-}
-</style>
-
+		.input-class[placeholder]{
+			line-height:30px;
+			font-size:22px;
+		}
+		body {
+			margin: 15px;
+		}
+	</style>
+</head>
+<body>
 <!-- yes this should be in a body tag, but f that -->
 <!-- All the intro HTML -->
-<h3>Make sure to allow pop ups.</h3>
 <h1>Doctor Social Search</h1>
+<h3>Make sure to allow pop ups.</h3>
 <h2>Quickly find citation sites for doctors.</h2>
 <p>Enter doctor information in the fields below and Dr Social Search will automatically generate new chrome tabs with SERP that attempt to find your doctor across multiple popular social sites. <strong>Please note, if only one new tab pops up, make sure to return to this page and allow pop ups.</strong></p>
 
@@ -45,6 +51,9 @@
 <span>(optional)</span>
 </br>
 <input type="button" value="Case Study Search" class="input-button" OnClick="docFinderBefore()"/>
+</br>
+</br>
+</br>
 <p>Got a feature request? </br><a href="mailto:doeswayneexist+a03yrhxuyi3iqvlcwj8f@boards.trello.com">Send it here. (Copy the email address in this link. Put the gist of the feture request as the subject.)</a></p>
 
 
@@ -150,3 +159,4 @@ function docFinderBefore (){
 	}
 }
 </script>
+</body>
