@@ -16,11 +16,20 @@
 		body {
 			margin: 15px;
 		}
+		.launchTime {
+			float: right;
+			margin-right: 50px;
+		}
 	</style>
 </head>
 <body>
 <!-- yes this should be in a body tag, but f that -->
 <!-- All the intro HTML -->
+<!-- This is the launch clock -->
+<div class="launchTime">
+	<p class="results"></p>
+</div>
+
 <h1>Doctor Social Search</h1>
 <h3>Make sure to allow pop ups.</h3>
 <h2>Quickly find citation sites for doctors.</h2>
@@ -158,5 +167,15 @@ function docFinderBefore (){
 		window.open(url, '_blank');
 	}
 }
+
+//adding a date
+var d = new Date();
+var launchFrame = 42; //42 days
+d.setDate(d.getDate() + launchFrame);
+var month = d.getMonth() + 1;
+var day = d.getDate();
+var year = d.getFullYear();
+var date = month + "/" + day + "/" + year;
+document.querySelector('.results').innerHTML = "Launch Clock: " + date;
 </script>
 </body>
