@@ -1,198 +1,206 @@
-<head>
-	<title>Dr. Social Search</title>
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<head>
+		<title>Dr. Social Search</title>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-	<!-- eventually i will place this in a sep css file -->
-	<style type="text/css">
-		.input-class{
-			height:30px;
-			margin-bottom: 12px;
+		<!-- eventually i will place this in a sep css file -->
+		<style type="text/css">
+			.input-class{
+				height:30px;
+				margin-bottom: 12px;
+			}
+
+			.input-class[placeholder]{
+				line-height:30px;
+				font-size:22px;
+			}
+			body {
+				margin: 15px;
+			}
+			.launchTime {
+				float: right;
+				margin-right: 50px;
+			}
+			#fileName {
+				display: none;
+			}
+		</style>
+	</head>
+
+
+
+	<body>
+	<!-- yes this should be in a body tag, but f that -->
+	<!-- All the intro HTML -->
+	<!-- This is the launch clock -->
+	<div class="launchTime">
+		<p class="results"></p>
+	</div>
+
+	<h1>Doctor Social Search</h1>
+	<h3>Make sure to allow pop ups.</h3>
+	<h2>Quickly find citation sites for doctors.</h2>
+	<p>Enter doctor information in the fields below and Dr Social Search will automatically generate new chrome tabs with SERP that attempt to find your doctor across multiple popular social sites. <strong>Please note, if only one new tab pops up, make sure to return to this page and allow pop ups.</strong></p>
+
+	<!-- Start the form -->
+	<!-- Basic fields for general search -->
+	<input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Name" id="drName"/>
+	</br>
+	<input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Specialty"id="drSpec"/>
+	<span>(optional)</span>
+	</br>
+	<input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Location"id="drLoc"/>
+	<span>(optional)</span>
+	</br>
+	<input type="button" value="General Web Presence Search" class="input-button" OnClick="docFinder()"/>
+	</br>
+	</br>
+	<input type="button" value="Review Site Search" class="input-button" OnClick="docFinderReviews()"/>
+	</br>
+	</br>
+
+	<!-- Fields for Case Study Search -->
+	<input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Website URL"id="drURL"/>
+	<span>(optional)</span>
+	</br>
+	<input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Neigborhood"id="drHood"/>
+	<span>(optional)</span>
+	</br>
+	<input type="button" value="Case Study Search" class="input-button" OnClick="docFinderBefore()"/>
+	</br>
+	</br>
+
+	<!-- <input type="text" name="enter" class="enter input-class" value="" placeholder="File Name"id="drFileName"/> <span>Copy this for file naming.</span> -->
+
+	<p><a href="https://docs.google.com/a/patientpop.com/document/d/1WzXRwEHq9kEluJS0JKBIEeiYrFQl0o-2DxQ4MLYyyWY/edit?usp=sharing" target="_blank">Case study picture naming conventions.</a></p>
+	<p>Last, first, specialty_site_length</p>
+
+	</br>
+	</br>
+	<p>Got a feature request? </br><a href="mailto:doeswayneexist+a03yrhxuyi3iqvlcwj8f@boards.trello.com">Send it here. (Copy the email address in this link. Put the gist of the feture request as the subject.)</a></p>
+
+	<h3>Template Images</h3>
+	<h4>Promo Placeholder</h4>
+	<img src="assets/promo-placeholder.jpg">
+	<h4>Hero Placeholder</h4>
+	<img src="assets/hero-placeholder.jpg">
+
+	<!-- All dem scripts start here -->
+	<script>
+
+	//remind people to allow pop ups.
+	//alert("If only one new tab is created return to this page and click allow pop ups.")
+	//create an array of social sites //first element is a space so that the first tab is a generic search
+	//var socialSites = ["", "google+plus", "Youtube", "Yelp", "Pinterest", "Realself", "LinkedinIn", "Vitals.com", "Healthgrades", "MD.com", "WebMD", "BetterDoctor", "RateMDs"];
+	var socialSitesNew = ["", "site:plus.google.com", "site:yelp.com", "site:vitals.com", "site:healthgrades.com", "site:md.com", "site:webmd.com"];
+	var reviewSites = ["", "Yelp", "Healthgrades", "Yellow Pages", "Facebook"];
+
+	//creates new tabs each with a google SERP looking for a doctor and a specific citation site
+	function docFinder (){
+
+		var docName = document.getElementById('drName').value;
+		var docArea = document.getElementById('drLoc').value;
+		var docSpec = document.getElementById('drSpec').value;
+		var docString = docName+" "+docArea+" "+docSpec;
+
+		for (i = 0; i < socialSitesNew.length; i++) { 
+		    //create a generic url query
+		    var url = "https://www.google.com/search?q="+socialSitesNew[i]+" "+docString;
+			//there doesnt seem to be a difference between the order of the two variables in the above string
+
+			//open a new window
+			window.open(url, '_blank');
+		}
+	}
+
+	//creates new tabs each with a google SERP looking for a doctor and a specific citation site
+	function docFinderReviews (){
+
+		var docName = document.getElementById('drName').value;
+		var docArea = document.getElementById('drLoc').value;
+		var docSpec = document.getElementById('drSpec').value;
+		var docString = docName+" "+docArea+" "+docSpec;
+
+		for (i = 0; i < reviewSites.length; i++) { 
+		    //create a generic url query
+		    var url = "https://www.google.com/search?q="+reviewSites[i]+" "+docString;
+			//there doesnt seem to be a difference between the order of the two variables in the above string
+
+			//open a new window
+			window.open(url, '_blank');
+		}
+	}
+
+	//creates new tabs that correspond to the tabs we need to do case studies
+	function docFinderBefore (){
+
+		//we need to open up pages for all the social sites
+		var socialSitesBefore = ["Google+plus", "Facebook", "Twitter", "Yelp"];
+		var url;
+		var docName = document.getElementById('drName').value;
+		var docArea = document.getElementById('drLoc').value;
+		var docSpec = document.getElementById('drSpec').value;
+		var docString = docName+" "+docArea+" "+docSpec;
+		var docURL = document.getElementById('drURL').value;
+		var docHood = document.getElementById('drHood').value;
+		var devInsights = "https://developers.google.com/speed/pagespeed/insights/?url="+docURL;
+		var ppCheck = "http://www.patientpop.com/checkup"
+
+		// create the name to copy for file nameing
+		// Fotinos, Christopher, DDS Before
+		//document.getElementById('drFileName').value = ;
+		//document.getElementById('drFileName').style.display="";
+
+		//open up basic windows
+		if(docURL) {
+			window.open(docURL, '_blank'); //doctors website
+			window.open(devInsights, '_blank'); //google insights page with docs url loaded
 		}
 
-		.input-class[placeholder]{
-			line-height:30px;
-			font-size:22px;
+		window.open("https://www.google.com/search?q="+docName);
+		window.open(ppCheck, '_blank'); //ppadmin tool that checks links online
+
+		//open up google SERPs with links to their social profiles
+		for (i = 0; i < socialSitesBefore.length; i++) { 
+		    //create a generic url query
+		    url = "https://www.google.com/search?q="+socialSitesBefore[i]+" "+docString;
+			//there doesnt seem to be a difference between the order of the two variables in the above string
+
+			//open a new window
+			window.open(url, '_blank');
 		}
-		body {
-			margin: 15px;
+
+		//open all the Google SERP pages
+		url = "https://www.google.com/search?q="+docString;
+		window.open(url, '_blank');
+		
+		url = "https://www.google.com/search?q="+docSpec+" "+docArea;
+		window.open(url, '_blank');
+		
+		//look for SERP pages if the doctor has neighborhoods
+		if(docHood){
+			url = "https://www.google.com/search?q="+docSpec+" "+docHood;
+			window.open(url, '_blank');
 		}
-		.launchTime {
-			float: right;
-			margin-right: 50px;
+		
+		//open up the Yelp SERP pages
+		url = "http://www.yelp.com/search?find_desc="+docSpec+"&find_loc="+docArea
+		window.open(url, '_blank');
+		
+		//look for Yelp SERP pages if the doctor has neighborhoods
+		if(docHood){
+			url = "http://www.yelp.com/search?find_desc="+docSpec+"&find_loc="+docHood
+			window.open(url, '_blank');
 		}
-		#fileName {
-			display: none;
-		}
-	</style>
-</head>
-<body>
-<!-- yes this should be in a body tag, but f that -->
-<!-- All the intro HTML -->
-<!-- This is the launch clock -->
-<div class="launchTime">
-	<p class="results"></p>
-</div>
-
-<h1>Doctor Social Search</h1>
-<h3>Make sure to allow pop ups.</h3>
-<h2>Quickly find citation sites for doctors.</h2>
-<p>Enter doctor information in the fields below and Dr Social Search will automatically generate new chrome tabs with SERP that attempt to find your doctor across multiple popular social sites. <strong>Please note, if only one new tab pops up, make sure to return to this page and allow pop ups.</strong></p>
-
-<!-- Start the form -->
-<!-- Basic fields for general search -->
-<input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Name" id="drName"/>
-</br>
-<input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Specialty"id="drSpec"/>
-<span>(optional)</span>
-</br>
-<input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Location"id="drLoc"/>
-<span>(optional)</span>
-</br>
-<input type="button" value="General Web Presence Search" class="input-button" OnClick="docFinder()"/>
-</br>
-</br>
-<input type="button" value="Review Site Search" class="input-button" OnClick="docFinderReviews()"/>
-</br>
-</br>
-
-<!-- Fields for Case Study Search -->
-<input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Website URL"id="drURL"/>
-<span>(optional)</span>
-</br>
-<input type="text" name="enter" class="enter input-class" value="" placeholder="Doctors Neigborhood"id="drHood"/>
-<span>(optional)</span>
-</br>
-<input type="button" value="Case Study Search" class="input-button" OnClick="docFinderBefore()"/>
-</br>
-</br>
-
-<!-- <input type="text" name="enter" class="enter input-class" value="" placeholder="File Name"id="drFileName"/> <span>Copy this for file naming.</span> -->
-
-<p><a href="https://docs.google.com/a/patientpop.com/document/d/1WzXRwEHq9kEluJS0JKBIEeiYrFQl0o-2DxQ4MLYyyWY/edit?usp=sharing" target="_blank">Case study picture naming conventions.</a></p>
-<p>Last, first, specialty_site_length</p>
-
-</br>
-</br>
-<p>Got a feature request? </br><a href="mailto:doeswayneexist+a03yrhxuyi3iqvlcwj8f@boards.trello.com">Send it here. (Copy the email address in this link. Put the gist of the feture request as the subject.)</a></p>
-
-
-<!-- All dem scripts start here -->
-<script>
-
-//remind people to allow pop ups.
-//alert("If only one new tab is created return to this page and click allow pop ups.")
-//create an array of social sites //first element is a space so that the first tab is a generic search
-//var socialSites = ["", "google+plus", "Youtube", "Yelp", "Pinterest", "Realself", "LinkedinIn", "Vitals.com", "Healthgrades", "MD.com", "WebMD", "BetterDoctor", "RateMDs"];
-var socialSitesNew = ["", "site:plus.google.com", "site:yelp.com", "site:vitals.com", "site:healthgrades.com", "site:md.com", "site:webmd.com"];
-var reviewSites = ["", "Yelp", "Healthgrades", "Yellow Pages", "Facebook"];
-
-//creates new tabs each with a google SERP looking for a doctor and a specific citation site
-function docFinder (){
-
-	var docName = document.getElementById('drName').value;
-	var docArea = document.getElementById('drLoc').value;
-	var docSpec = document.getElementById('drSpec').value;
-	var docString = docName+" "+docArea+" "+docSpec;
-
-	for (i = 0; i < socialSitesNew.length; i++) { 
-	    //create a generic url query
-	    var url = "https://www.google.com/search?q="+socialSitesNew[i]+" "+docString;
-		//there doesnt seem to be a difference between the order of the two variables in the above string
-
-		//open a new window
-		window.open(url, '_blank');
-	}
-}
-
-//creates new tabs each with a google SERP looking for a doctor and a specific citation site
-function docFinderReviews (){
-
-	var docName = document.getElementById('drName').value;
-	var docArea = document.getElementById('drLoc').value;
-	var docSpec = document.getElementById('drSpec').value;
-	var docString = docName+" "+docArea+" "+docSpec;
-
-	for (i = 0; i < reviewSites.length; i++) { 
-	    //create a generic url query
-	    var url = "https://www.google.com/search?q="+reviewSites[i]+" "+docString;
-		//there doesnt seem to be a difference between the order of the two variables in the above string
-
-		//open a new window
-		window.open(url, '_blank');
-	}
-}
-
-//creates new tabs that correspond to the tabs we need to do case studies
-function docFinderBefore (){
-
-	//we need to open up pages for all the social sites
-	var socialSitesBefore = ["Google+plus", "Facebook", "Twitter", "Yelp"];
-	var url;
-	var docName = document.getElementById('drName').value;
-	var docArea = document.getElementById('drLoc').value;
-	var docSpec = document.getElementById('drSpec').value;
-	var docString = docName+" "+docArea+" "+docSpec;
-	var docURL = document.getElementById('drURL').value;
-	var docHood = document.getElementById('drHood').value;
-	var devInsights = "https://developers.google.com/speed/pagespeed/insights/?url="+docURL;
-	var ppCheck = "http://www.patientpop.com/checkup"
-
-	// create the name to copy for file nameing
-	// Fotinos, Christopher, DDS Before
-	//document.getElementById('drFileName').value = ;
-	//document.getElementById('drFileName').style.display="";
-
-	//open up basic windows
-	if(docURL) {
-		window.open(docURL, '_blank'); //doctors website
-		window.open(devInsights, '_blank'); //google insights page with docs url loaded
 	}
 
-	window.open("https://www.google.com/search?q="+docName);
-	window.open(ppCheck, '_blank'); //ppadmin tool that checks links online
-
-	//open up google SERPs with links to their social profiles
-	for (i = 0; i < socialSitesBefore.length; i++) { 
-	    //create a generic url query
-	    url = "https://www.google.com/search?q="+socialSitesBefore[i]+" "+docString;
-		//there doesnt seem to be a difference between the order of the two variables in the above string
-
-		//open a new window
-		window.open(url, '_blank');
-	}
-
-	//open all the Google SERP pages
-	url = "https://www.google.com/search?q="+docString;
-	window.open(url, '_blank');
-	
-	url = "https://www.google.com/search?q="+docSpec+" "+docArea;
-	window.open(url, '_blank');
-	
-	//look for SERP pages if the doctor has neighborhoods
-	if(docHood){
-		url = "https://www.google.com/search?q="+docSpec+" "+docHood;
-		window.open(url, '_blank');
-	}
-	
-	//open up the Yelp SERP pages
-	url = "http://www.yelp.com/search?find_desc="+docSpec+"&find_loc="+docArea
-	window.open(url, '_blank');
-	
-	//look for Yelp SERP pages if the doctor has neighborhoods
-	if(docHood){
-		url = "http://www.yelp.com/search?find_desc="+docSpec+"&find_loc="+docHood
-		window.open(url, '_blank');
-	}
-}
-
-//adding a date
-var d = new Date();
-var launchFrame = 42; //42 days
-d.setDate(d.getDate() + launchFrame);
-var month = d.getMonth() + 1;
-var day = d.getDate();
-var year = d.getFullYear();
-var date = month + "/" + day + "/" + year;
-document.querySelector('.results').innerHTML = "Launch Clock: " + date;
-</script>
-</body>
+	//adding a date
+	var d = new Date();
+	var launchFrame = 42; //42 days
+	d.setDate(d.getDate() + launchFrame);
+	var month = d.getMonth() + 1;
+	var day = d.getDate();
+	var year = d.getFullYear();
+	var date = month + "/" + day + "/" + year;
+	document.querySelector('.results').innerHTML = "Launch Clock: " + date;
+	</script>
+	</body>
